@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rekomendasi Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #a0aec0;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --error: #f56565;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-hover: rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ffffff, #f0f4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.5)); }
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: 0 auto 40px;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.1),
+                0 1px 0 rgba(255,255,255,0.5) inset;
+            position: relative;
+            z-index: 5;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .search-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        form {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            position: relative;
+        }
+        
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 18px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2), 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+        
+        input[type="text"]::placeholder {
+            color: var(--gray);
+        }
+        
+        button {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .results-section {
+            margin-top: 30px;
+        }
+        
+        h2 {
+            color: var(--dark);
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            background: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            background: white;
+        }
+        
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        th:first-child {
+            border-top-left-radius: 16px;
+        }
+        
+        th:last-child {
+            border-top-right-radius: 16px;
+        }
+        
+        tbody tr {
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tbody tr:hover {
+            background: linear-gradient(135deg, #f1f5ff 0%, #e8f2ff 100%);
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 16px;
+        }
+        
+        tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 16px;
+        }
+        
+        td {
+            font-size: 15px;
+            color: var(--dark);
+            font-weight: 400;
+        }
+        
+        td:first-child {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .rating-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            min-width: 50px;
+        }
+        
+        .rating-high {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+        }
+        
+        .rating-medium {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+            color: white;
+        }
+        
+        .rating-low {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            color: white;
+        }
+        
+        .error {
+            color: var(--error);
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #fed7d7, #feb2b2);
+            border-radius: 12px;
+            border-left: 4px solid var(--error);
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(245, 101, 101, 0.2);
+            animation: errorShake 0.5s ease-in-out;
+        }
+        
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        em {
+            font-style: normal;
+            color: var(--primary);
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray);
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+            font-size: 18px;
+        }
+        
+        .no-results::before {
+            content: '🎮';
+            display: block;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            form {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .table-wrapper {
+                overflow-x: auto;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Focus styles for accessibility */
+        button:focus,
+        input:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🎮 Rekomendasi Game</h1>
+            <p class="subtitle">Temukan game favorit Anda dengan mudah</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-section">
+            <form method="POST">
+                <div class="input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" name="search_query" placeholder="Cari game yang Anda inginkan..." required>
+                </div>
+                <button type="submit">Cari Game</button>
+            </form>
+        </div>
+
+        {% if search_error %}
+            <div class="error">{{ search_error }}</div>
+        {% endif %}
+
+        {% if selected_game %}
+            <div class="results-section">
+                <h2>Rekomendasi untuk: <em>{{ selected_game }}</em></h2>
+            </div>
+        {% endif %}
+
+        {% if recommendations %}
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>🎯 Judul</th>
+                        <th>⭐ Rating (%)</th>
+                        <th>📝 Review</th>
+                        <th>👥 User Reviews</th>
+                        <th>💰 Harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for game in recommendations %}
+                    <tr>
+                        <td>{{ game['title'] }}</td>
+                        <td>
+                            <span class="rating-badge {% if game['Rating']|int >= 80 %}rating-high{% elif game['Rating']|int >= 60 %}rating-medium{% else %}rating-low{% endif %}">
+                                {{ game['Rating'] }}
+                            </span>
+                        </td>
+                        <td>{{ game['Review'] }}</td>
+                        <td>{{ game['user_reviews'] }}</td>
+                        <td>{{ game['Price'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Add smooth interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const input = document.querySelector('input[type="text"]');
+            const button = document.querySelector('button');
+            
+            // Add loading state
+            form.addEventListener('submit', function() {
+                button.innerHTML = '<div class="spinner"></div>Mencari...';
+                button.disabled = true;
+            });
+            
+            // Add input focus effects
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+            
+            // Add table row click effects
+            const tableRows = document.querySelectorAll('tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1.01)';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
